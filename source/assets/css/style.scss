@@ -7,6 +7,7 @@ $text-black: #292929;
 
 body {
 	font-family: 'Poppins', sans-serif;
+	position: relative;
 }
 .section-title {
 	color: $gray-800;
@@ -316,6 +317,9 @@ body {
 		}
 	}
 }
+.flatpickr-calendar {
+//	position: fixed !important;
+}
 .flatpickr-current-month .flatpickr-monthDropdown-months {
 	appearance: none;
 	background-color: #FFF !important;
@@ -354,6 +358,10 @@ body {
 	html {
 		&.noscroll {
 			overflow: hidden;
+			body {
+				overflow: hidden;
+				max-height: 100vh;
+			}
 		}
 	}
 	.section-title {
@@ -373,15 +381,13 @@ body {
 		top: 0.75rem;
 		z-index: 9999;
 		padding: 0;
-		
 	}
-
 	#sidebar_filter {
 		position: fixed;
 		right: 0;
 		top: 0;
 		bottom: 0;
-		max-width: 24rem;
+		max-width: 26rem;
 		pointer-events: none;
 		will-change: transform;
 		transition: all 0.2s ease-out;
@@ -392,11 +398,13 @@ body {
 		}
 		.inner-wrap {
 			padding-top: 5rem !important;
-			display: block;
+			align-items: flex-end;
+
 			.content {
 				padding-right: 0 !important;
 				margin-right: 0 !important;
 				max-width: 28rem;
+				position: relative;
 			}
 		}
 	}
@@ -404,18 +412,41 @@ body {
 		margin-top: 3rem !important;
 	}
 	#item_list {
-		min-height: unset;
+		min-height: 5rem;
+		
 		.item {
 		h3 {
 			font-size: 0.875rem;
 		}
 	}
 	}
+	#not_found {
+			h2 {
+			font-size: 1.75rem;
+			}
+		}
 	#main_content {
 		display: block;
+		min-height: 100vh;
 	}
 	#sidebar_filter .category-filters input {
 		top: 0.1rem;
+	}
+	#backdrop_mask {
+		background-color: rgba($gray-900, 0.3);
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		z-index: 20;
+		transition: all 0.3s ease;
+		opacity: 0;
+		pointer-events: none;
+		&.opened {
+			opacity: 1;
+		pointer-events: all;
+		}
 	}
 }
 @include media-breakpoint-down(sm) {

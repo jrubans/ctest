@@ -86,7 +86,7 @@ var setPage = function(currentPage, currentData) {
 	} else {
 		document.getElementById("not_found").classList.remove("show");
 	}
-	window.scrollTo(0, 0);
+	window.scroll({ top: 0, left: 0, behavior: 'smooth'});
 	totalPages = Math.ceil(currentData.length / itemsPerPage);
 	document.querySelector('#total_pages').innerHTML = totalPages.toString();
 
@@ -140,9 +140,10 @@ const dateRangeFilter = flatpickr("#datepicker", {
 	minDate: minDateF,
 	maxDate: maxDateF,
 	//defaultDate: minDateF,
-	disableMobile: "true",
+	animate: false,
+	disableMobile: true,
+	//positionElement: document.querySelectorAll('#sidebar_filter .inner-wrap .content')[0],
 	onDayCreate: function(dObj, dStr, fp, dayElem) {
-
 		if (allEventDates.indexOf(+dayElem.dateObj) !== -1) {
 			dayElem.className += " has-event";
 		}
@@ -158,6 +159,10 @@ const dateRangeFilter = flatpickr("#datepicker", {
 		});
 		}
 	}
+});
+
+window.addEventListener('scroll', function() {
+dateRangeFilter._positionCalendar();
 });
 
 
@@ -280,7 +285,12 @@ mobSidebarToggle.addEventListener('click', e => {
 	mobSidebarToggle.classList.toggle("opened");
 	document.getElementById("sidebar_filter").classList.toggle("opened");
 	document.getElementsByTagName("HTML")[0].classList.toggle("noscroll");
-
+	document.getElementById("backdrop_mask").classList.toggle("opened");
+});
+document.getElementById("backdrop_mask").addEventListener('click', e => {
+		document.getElementById("sidebar_filter").classList.toggle("opened");
+	document.getElementsByTagName("HTML")[0].classList.toggle("noscroll");
+	document.getElementById("backdrop_mask").classList.toggle("opened");
 });
 
 
