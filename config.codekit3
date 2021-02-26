@@ -9,6 +9,12 @@
 	],
 "creatorBuild": "32186",
 "files": {
+	"/build": {
+		"ft": 65536,
+		"oA": 1,
+		"oAP": "/build/build",
+		"oF": 0
+		},
 	"/README.md": {
 		"cB": 0,
 		"cS": 0,
@@ -14465,7 +14471,7 @@
 		"ft": 128,
 		"jxM": 0,
 		"ma": 0,
-		"mi": 1,
+		"mi": 0,
 		"moR": 0,
 		"moT": 2,
 		"oA": 0,
@@ -14489,11 +14495,11 @@
 	},
 "projectAttributes": {
 	"creationDate": 635872109.27858698,
-	"displayValue": "cubetest",
+	"displayValue": "ctest",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "brackets_gray",
 	"iconImageWasSetByUser": 0,
-	"lastBuiltDate": 636036886.74996603
+	"lastBuiltDate": 636039901.78954804
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
@@ -16007,7 +16013,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http://localhost/Github/cubetest/build",
+	"externalServerAddress": "http://localhost/Github/ctest/build",
 	"gitIgnoreBuildFolder": 0,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",
@@ -16598,7 +16604,7 @@
 	"npmInstallOptionalDependencies": 0,
 	"npmSaveExactVersion": 0,
 	"npmTargetDependencyListType": 1,
-	"overrideExternalServerCSS": 0,
+	"overrideExternalServerCSS": 1,
 	"previewPathAddition": "",
 	"rollupExternals": "",
 	"rollupReplacements": "process.env.NODE_ENV:::$NODE_ENV,,,ENVIRONMENT:::$NODE_ENV",

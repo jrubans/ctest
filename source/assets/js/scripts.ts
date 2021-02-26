@@ -123,20 +123,18 @@ window.addEventListener('popstate', (event) => {
 
 // DATEPICKER
 function addHoursToDate(date: Date, hours: number): Date {
-  return new Date(new Date(date).setHours(date.getHours() + hours));
+	return new Date(new Date(date).setHours(date.getHours() + hours));
 }
-
 var d;
 for (d = 0; d < currentData.length; d++) {
-	allEventDates.push(currentData[d].dateTime);
+	allEventDates.push(Date.parse(currentData[d].date));
 }
-
 const dateRangeFilter = flatpickr("#datepicker", {
 	mode: "range",
 	locale: "lv",
 	minDate: minDateF,
 	maxDate: maxDateF,
-	defaultDate: minDateF,
+	//defaultDate: minDateF,
 	disableMobile: "true",
 	onDayCreate: function(dObj, dStr, fp, dayElem) {
 		if (allEventDates.indexOf(+dayElem.dateObj) !== -1) {
@@ -148,10 +146,10 @@ const dateRangeFilter = flatpickr("#datepicker", {
 		filterMinDate = new Date(selectedDates[0]);
 		filterMaxDate = new Date(selectedDates[1]);
 		filterMaxDate = addHoursToDate(filterMaxDate,24)
-document.querySelectorAll('#type_filters input[type="checkbox"]').forEach(checkbox => {
-	let input: any = document.getElementById(checkbox.id);
-epicFilteringFn(event, input);
-});
+		document.querySelectorAll('#type_filters input[type="checkbox"]').forEach(checkbox => {
+			let input: any = document.getElementById(checkbox.id);
+			epicFilteringFn(event, input);
+		});
 	}
 });
 
@@ -226,9 +224,9 @@ function epicFilteringFn(event, input) {
 						return c-d;
 					});
 					currentData = filteredArray.filter(_item => {
-			var dateTime = _item.dateTime;
-			return (dateTime >= filterMinDate && dateTime <= filterMaxDate);
-		});
+						var dateTime = _item.dateTime;
+						return (dateTime >= filterMinDate && dateTime <= filterMaxDate);
+					});
 					setPage(currentPage, currentData);
 					window.history.pushState({page: currentPage}, "title " + currentPage, "?page=" + currentPage);
 				}
