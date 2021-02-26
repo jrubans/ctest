@@ -142,7 +142,6 @@ const dateRangeFilter = flatpickr("#datepicker", {
 		}
 	},
 	onClose: function(selectedDates, dateStr, instance){
-		console.log(selectedDates[0], selectedDates[1]);
 		filterMinDate = new Date(selectedDates[0]);
 		filterMaxDate = new Date(selectedDates[1]);
 		filterMaxDate = addHoursToDate(filterMaxDate,24)
