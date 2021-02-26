@@ -18,26 +18,21 @@ fetch('assets/data/mock_data2019.json')
 	return response.json();
 })
 .then(function(myJson) {
-	
-
 	let dateTime: any;
 	var t;
 	for (t = 0; t < myJson.length; t++) {
 		dateTime = new Date(myJson[t].date + ' ' + myJson[t].time);
 		myJson[t].dateTime = dateTime;
-		//console.log(dateTime);
 	}
-
 	myJson.sort(function(a,b){
 		var c: any = a.dateTime;
 		var d: any = b.dateTime;
 		return c-d;
 	});
-
-	console.log(myJson);
-
 	data=myJson
 	currentData=myJson
+
+
 
 
 // FLATPICKR DATE RANGE DEFINITION
@@ -48,9 +43,11 @@ let filterMaxDate: any = maxDateF;
 
 
 
+
 // PAGINATION
 let itemsPerPage: number = 6;
 let totalPages: number = Math.ceil(currentData.length / itemsPerPage);
+
 
 
 
@@ -58,8 +55,6 @@ let totalPages: number = Math.ceil(currentData.length / itemsPerPage);
 let currentPageItems: any = [];
 window.history.pushState({page: currentPage}, "title " + currentPage, "?page=" + currentPage);
 function paginate(currentData, itemsPerPage, currentPage) {
-
-
 	currentPageItems = currentData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 	let currentPageDOM: string = '';
 	var i;
@@ -127,13 +122,9 @@ window.addEventListener('popstate', (event) => {
 
 
 // DATEPICKER
-
-
-
 function addHoursToDate(date: Date, hours: number): Date {
   return new Date(new Date(date).setHours(date.getHours() + hours));
 }
-
 
 var d;
 for (d = 0; d < currentData.length; d++) {
@@ -143,7 +134,6 @@ for (d = 0; d < currentData.length; d++) {
 const dateRangeFilter = flatpickr("#datepicker", {
 	mode: "range",
 	locale: "lv",
-	//dateFormat: 'd.m.Y',
 	minDate: minDateF,
 	maxDate: maxDateF,
 	defaultDate: minDateF,
@@ -154,29 +144,14 @@ const dateRangeFilter = flatpickr("#datepicker", {
 		}
 	},
 	onClose: function(selectedDates, dateStr, instance){
-
-
 		console.log(selectedDates[0], selectedDates[1]);
 		filterMinDate = new Date(selectedDates[0]);
 		filterMaxDate = new Date(selectedDates[1]);
 		filterMaxDate = addHoursToDate(filterMaxDate,24)
-
 document.querySelectorAll('#type_filters input[type="checkbox"]').forEach(checkbox => {
 	let input: any = document.getElementById(checkbox.id);
 epicFilteringFn(event, input);
 });
-
-
-		// let dateFilteredArray: any = [];
-
-		// currentData	= data;
-		// dateFilteredArray = currentData.filter(_item => {
-		// 	var dateTime = _item.dateTime;
-		// 	return (dateTime >= filterMinDate && dateTime <= filterMaxDate);
-		// });
-		// currentData = dateFilteredArray;
-		// setPage(currentPage, currentData);
-		// window.history.pushState({page: currentPage}, "title " + currentPage, "?page=" + currentPage);
 	}
 });
 
@@ -265,6 +240,9 @@ function epicFilteringFn(event, input) {
 
 
 
+
+
+
 // ATTACH FILTERING FUNCTIONALITY TO SIDEBAR CHECKBOXES
 let allCheckboxes: any = document.querySelectorAll('#type_filters input[type="checkbox"]');
 allCheckboxes[0].checked = true;
@@ -274,10 +252,6 @@ document.querySelectorAll('#type_filters input[type="checkbox"]').forEach(checkb
 		epicFilteringFn(event, input);
 	});
 });
-
-
-
-
 
 
 
@@ -303,17 +277,4 @@ mobSidebarToggle.addEventListener('click', e => {
 });
 
 
-
-
 });
-
-
-
-
-
-
-
-
-
-
-

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>CUBE Test</title>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<script defer src="https://npmcdn.com/flatpickr@4.6.9/dist/l10n/lv.js"></script>
+	<script defer src="assets/js/flatpickr.min.js"></script>
+	<script defer src="assets/js/flatpickr-locale-lv.min.js"></script>
+	<script defer src="assets/js/scripts.js"></script>
+	<link rel="icon" href="assets/img/favicon.svg">
+</head>
+<body>
+	<button class="btn btn-dark" id="menu-button">
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-right" viewBox="0 0 16 16">
+			<path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5zm0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5z"/>
+		</svg>
+	</button>
+	<div id="loading" class="loader-screen">
+		<div class="spinner-border" style="width: 25vh; height: 25vh;" role="status">
+			<span class="visually-hidden">Loading...</span>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-lg-8 py-4" id="main_content">
+				<div class="main-content-wrap">
+					<h2 class="section-title">Šonedēļ</h2>
+					<div class="row" id="item_list"></div>
+					<div class="pt-3 mt-1" id="pagination">
+						<button class="btn pager prev disabled">←</button>
+						<span class="page-numbers"><span id="current_page"></span>/<span id="total_pages"></span></span>
+						<button class="btn pager next">→</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-lg-4" id="sidebar_filter">
+				<div class="inner-wrap py-4 px-4">
+					<div class="content px-2 py-5">
+						<div class="form-floating mb-4 sidebar-text-input disabled">
+							<input type="text" class="form-control" id="sidebar_search" placeholder="Meklēt notikumu" disabled>
+							<label for="sidebar_search">Meklēt notikumu</label>
+							<div class="icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+									<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+								</svg>
+							</div>
+						</div>
+						<div class="category-filters" id="type_filters"></div>
+						<hr class="my-4">
+						<div class="form-floating mt-4 mb-2	 sidebar-text-input">
+							<input type="date" class="form-control" id="datepicker" placeholder="Meklēt notikumu">
+							<label for="datepicker">Atlasīt laika periodu</label>
+							<div class="icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+									<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+								</svg>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
