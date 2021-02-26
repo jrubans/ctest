@@ -81,6 +81,11 @@ function paginate(currentData, itemsPerPage, currentPage) {
 let prevPageBtn = document.querySelector('.pager.prev');
 let nextPageBtn = document.querySelector('.pager.next');
 var setPage = function(currentPage, currentData) {
+	if (currentData.length <= 0) {
+		document.getElementById("not_found").classList.add("show");
+	} else {
+		document.getElementById("not_found").classList.remove("show");
+	}
 	window.scrollTo(0, 0);
 	totalPages = Math.ceil(currentData.length / itemsPerPage);
 	document.querySelector('#total_pages').innerHTML = totalPages.toString();
@@ -137,11 +142,13 @@ const dateRangeFilter = flatpickr("#datepicker", {
 	//defaultDate: minDateF,
 	disableMobile: "true",
 	onDayCreate: function(dObj, dStr, fp, dayElem) {
+
 		if (allEventDates.indexOf(+dayElem.dateObj) !== -1) {
 			dayElem.className += " has-event";
 		}
 	},
 	onClose: function(selectedDates, dateStr, instance){
+		if(selectedDates.length >= 2) {
 		filterMinDate = new Date(selectedDates[0]);
 		filterMaxDate = new Date(selectedDates[1]);
 		filterMaxDate = addHoursToDate(filterMaxDate,24)
@@ -149,6 +156,7 @@ const dateRangeFilter = flatpickr("#datepicker", {
 			let input: any = document.getElementById(checkbox.id);
 			epicFilteringFn(event, input);
 		});
+		}
 	}
 });
 
@@ -182,6 +190,7 @@ function epicFilteringFn(event, input) {
 	let activeFilters: any = [];
 	let checkedFilters: any;
 	currentPage = 1;
+
 	if (input.value == "Visas tēmas") {
 		if (input.checked) {
 			currentData = data;
@@ -199,6 +208,7 @@ function epicFilteringFn(event, input) {
 		}
 	} else {
 		if (document.querySelectorAll('#type_filters input[type="checkbox"]:checked').length <= 0) {
+			allCheckboxes[0].checked = true;
 			currentData = data;
 			currentData = currentData.filter(_item => {
 				var dateTime = _item.dateTime;
@@ -269,7 +279,7 @@ let mobSidebarToggle: any = document.getElementById("menu-button");
 mobSidebarToggle.addEventListener('click', e => {
 	mobSidebarToggle.classList.toggle("opened");
 	document.getElementById("sidebar_filter").classList.toggle("opened");
-	document.getElementsByTagName("BODY")[0].classList.toggle("noscroll");
+	document.getElementsByTagName("HTML")[0].classList.toggle("noscroll");
 
 });
 

@@ -24,6 +24,30 @@ body {
 	align-items: center;
 	.main-content-wrap {
 		width: 100%;
+		position: relative;
+	}
+}
+#not_found {
+	color: $gray-500;
+	position: absolute;
+	top: 5em;
+	left: 0;
+	right: 0;
+	bottom: 7rem;
+	display: flex;
+	opacity: 0;
+	visibility: hidden;
+	will-change: opacity;
+	transition: all 0.3s ease;
+	z-index: 0;
+	pointer-events: none;
+	h2 {
+		font-size: 2.5rem;
+		font-weight: 200;
+	}
+	&.show {
+		opacity: 1;
+		visibility: visible;
 	}
 }
 #item_list {
@@ -135,6 +159,7 @@ body {
 	right: 0;
 	top: 0;
 	bottom: 0;
+	margin: auto;
 	backface-visibility: hidden;
 	z-index: 999;
 	overflow-y: scroll;
@@ -276,12 +301,17 @@ body {
 }
 #menu-button {
 	display: none;
-	color: #FFF;
+	color: $text-black;
+	padding: 0.25rem;
+	&.opened {
+			background-color: $gray-400;
+			border-color: $gray-400;
+		}
 	svg {
-		width: 1.5rem;
-		height: 1.5rem;
+		width: 3.25rem;
+		height: 3.25rem;
 		path {
-			stroke: #FFF;
+			stroke: $text-black;
 			stroke-width: 0.25px;
 		}
 	}
@@ -320,13 +350,16 @@ body {
 }
 
 @include media-breakpoint-down(lg) {
-	body {
+
+	html {
 		&.noscroll {
 			overflow: hidden;
 		}
 	}
 	.section-title {
 		margin-right: unset;
+		padding-top: 0.5rem;
+		padding-bottom: 1.5rem;
 	}
 	.container {
 		max-width: 100%;
@@ -339,7 +372,10 @@ body {
 		right: 1.5rem;
 		top: 0.75rem;
 		z-index: 9999;
+		padding: 0;
+		
 	}
+
 	#sidebar_filter {
 		position: fixed;
 		right: 0;
@@ -364,8 +400,16 @@ body {
 			}
 		}
 	}
+	#pagination {
+		margin-top: 3rem !important;
+	}
 	#item_list {
 		min-height: unset;
+		.item {
+		h3 {
+			font-size: 0.875rem;
+		}
+	}
 	}
 	#main_content {
 		display: block;
@@ -376,6 +420,6 @@ body {
 }
 @include media-breakpoint-down(sm) {
 	html {
-		font-size: 16px;
+		font-size: 14px;
 	}
 }
