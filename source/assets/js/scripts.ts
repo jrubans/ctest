@@ -89,7 +89,6 @@ var setPage = function(currentPage, currentData) {
 	window.scroll({ top: 0, left: 0, behavior: 'smooth'});
 	totalPages = Math.ceil(currentData.length / itemsPerPage);
 	document.querySelector('#total_pages').innerHTML = totalPages.toString();
-
 	if (currentPage <= 1) {
 		currentPage = 1;
 		prevPageBtn.classList.add("disabled")
@@ -141,7 +140,6 @@ const dateRangeFilter = flatpickr("#datepicker", {
 	//defaultDate: minDateF,
 	animate: false,
 	disableMobile: true,
-	//positionElement: document.querySelectorAll('#sidebar_filter .inner-wrap .content')[0],
 	onDayCreate: function(dObj, dStr, fp, dayElem) {
 		if (allEventDates.indexOf(+dayElem.dateObj) !== -1) {
 			dayElem.className += " has-event";
@@ -149,19 +147,19 @@ const dateRangeFilter = flatpickr("#datepicker", {
 	},
 	onClose: function(selectedDates, dateStr, instance){
 		if(selectedDates.length >= 2) {
-		filterMinDate = new Date(selectedDates[0]);
-		filterMaxDate = new Date(selectedDates[1]);
-		filterMaxDate = addHoursToDate(filterMaxDate,24)
-		document.querySelectorAll('#type_filters input[type="checkbox"]').forEach(checkbox => {
-			let input: any = document.getElementById(checkbox.id);
-			epicFilteringFn(event, input);
-		});
+			filterMinDate = new Date(selectedDates[0]);
+			filterMaxDate = new Date(selectedDates[1]);
+			filterMaxDate = addHoursToDate(filterMaxDate,24)
+			document.querySelectorAll('#type_filters input[type="checkbox"]').forEach(checkbox => {
+				let input: any = document.getElementById(checkbox.id);
+				epicFilteringFn(input);
+			});
 		}
 	}
 });
 
 window.addEventListener('scroll', function() {
-dateRangeFilter._positionCalendar();
+	dateRangeFilter._positionCalendar();
 });
 
 
@@ -189,37 +187,31 @@ buildFiltersDOM(data);
 
 
 // EPIC FILTERING FUNCTION
-function epicFilteringFn(event, input) {
+function epicFilteringFn(input) {
 	let filteredArray: any = [];
 	let activeFilters: any = [];
 	let checkedFilters: any;
 	currentPage = 1;
-
-	if (input.value == "Visas tēmas") {
-		if (input.checked) {
-			currentData = data;
-			currentData = currentData.filter(_item => {
-				var dateTime = _item.dateTime;
-				return (dateTime >= filterMinDate && dateTime <= filterMaxDate);
-			});
-			setPage(currentPage, currentData);
-			window.history.pushState({page: currentPage}, "title " + currentPage, "?page=" + currentPage);
-			filteredArray = [];
-			var j;
-			for (j = 1; j < allCheckboxes.length; j++) {
-				allCheckboxes[j].checked = false;
-			}
+	function allThemesFilter(input) {
+		currentData = data;
+		currentData = currentData.filter(_item => {
+			var dateTime = _item.dateTime;
+			return (dateTime >= filterMinDate && dateTime <= filterMaxDate);
+		});
+		setPage(currentPage, currentData);
+		window.history.pushState({page: currentPage}, "title " + currentPage, "?page=" + currentPage);
+		filteredArray = [];
+		var j;
+		for (j = 1; j < allCheckboxes.length; j++) {
+			allCheckboxes[j].checked = false;
 		}
+	}
+	if (input.value == "Visas tēmas" && input.checked) {
+		allThemesFilter(input);
 	} else {
 		if (document.querySelectorAll('#type_filters input[type="checkbox"]:checked').length <= 0) {
 			allCheckboxes[0].checked = true;
-			currentData = data;
-			currentData = currentData.filter(_item => {
-				var dateTime = _item.dateTime;
-				return (dateTime >= filterMinDate && dateTime <= filterMaxDate);
-			});
-			setPage(currentPage, currentData);
-			window.history.pushState({page: currentPage}, "title " + currentPage, "?page=" + currentPage);
+			allThemesFilter(input);
 		} else {
 			allCheckboxes[0].checked = false;
 			checkedFilters = document.querySelectorAll('#type_filters input[type="checkbox"]:checked');
@@ -244,6 +236,8 @@ function epicFilteringFn(event, input) {
 					window.history.pushState({page: currentPage}, "title " + currentPage, "?page=" + currentPage);
 				}
 				i++;
+
+
 			});
 		}
 	}
@@ -260,7 +254,7 @@ allCheckboxes[0].checked = true;
 document.querySelectorAll('#type_filters input[type="checkbox"]').forEach(checkbox => {
 	let input: any = document.getElementById(checkbox.id);
 	input.addEventListener('change', event => {
-		epicFilteringFn(event, input);
+		epicFilteringFn(input);
 	});
 });
 
@@ -287,9 +281,9 @@ mobSidebarToggle.addEventListener('click', e => {
 	document.getElementById("backdrop_mask").classList.toggle("opened");
 });
 document.getElementById("backdrop_mask").addEventListener('click', e => {
-		document.getElementById("sidebar_filter").classList.toggle("opened");
-	document.getElementsByTagName("HTML")[0].classList.toggle("noscroll");
-	document.getElementById("backdrop_mask").classList.toggle("opened");
+	document.getElementById("sidebar_filter").classList.remove("opened");
+	document.getElementsByTagName("HTML")[0].classList.remove("noscroll");
+	document.getElementById("backdrop_mask").classList.remove("opened");
 });
 
 

@@ -457,10 +457,14 @@ body {
 	html {
 		font-size: 14px;
 	}
+	#pagination {
+		margin-top: 2rem !important;
+	}
 	#item_list {
 		.item {
 			a {
 				display: block;
+				padding-top: 1.5rem;
 				&:hover {
 					.img-ct {
 						img {
