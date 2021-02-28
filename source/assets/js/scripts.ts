@@ -60,7 +60,7 @@ function paginate(currentData, itemsPerPage, currentPage) {
 	var i;
 	for (i = 0; i < currentPageItems.length; i++) {
 		var imgURL = (currentPageItems[i].lead_image == null) ? "assets/img/placeholder.svg" : currentPageItems[i].lead_image;
-		currentPageDOM += '<div class="col-6 col-sm-6 col-md-4 item"><a href="#"><div class="date">' + new Date(currentPageItems[i].dateTime).toLocaleDateString('lv-LV', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'utc'}) +
+		currentPageDOM += '<div class="col-12 col-sm-6 col-md-4 item"><a href="#"><div class="date">' + new Date(currentPageItems[i].dateTime).toLocaleDateString('lv-LV', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'utc'}) +
 		'</div><div class="img-ct"><img loading="lazy" src="' + imgURL + 
 		'" alt="' + currentPageItems[i].title + '"></div><div class="category"><span>' + currentPageItems[i].type 
 		+ '</span></div><h3>' + currentPageItems[i].title + '</h3></a></div>';
@@ -109,7 +109,6 @@ prevPageBtn.addEventListener('click', e => {
 	currentPage = currentPage - 1
 	window.history.pushState({page: currentPage}, "title " + currentPage, "?page=" + currentPage);
 	setPage(currentPage, currentData);
-	
 });
 nextPageBtn.addEventListener('click', e => {
 	currentPage = currentPage + 1

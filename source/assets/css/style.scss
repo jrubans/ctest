@@ -18,6 +18,10 @@ body {
 	letter-spacing: 0.3em;
 	text-transform: uppercase;
 	font-weight: 600;
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
 }
 #main_content {
 	display: flex;
@@ -191,7 +195,7 @@ body {
 			}
 			.icon {
 				> svg {
-				color: $gray-400 !important;
+					color: $gray-400 !important;
 				}
 			}
 		}
@@ -284,14 +288,14 @@ body {
 	right: 0;
 	top:0;
 	bottom: 0;
-	z-index: 999;
+	z-index: 99999;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	will-change: opacity;
 	color: $gray-200;
 	&.loaded {
-		transition: all 0.5s ease;
+		transition: all 0.5s ease-in;
 		opacity: 0;
 		visibility: none;
 		pointer-events: none;
@@ -305,9 +309,9 @@ body {
 	color: $text-black;
 	padding: 0.25rem;
 	&.opened {
-			background-color: $gray-400;
-			border-color: $gray-400;
-		}
+		background-color: $gray-400;
+		border-color: $gray-400;
+	}
 	svg {
 		width: 3.25rem;
 		height: 3.25rem;
@@ -415,16 +419,16 @@ body {
 		min-height: 5rem;
 		
 		.item {
-		h3 {
-			font-size: 0.875rem;
-		}
-	}
-	}
-	#not_found {
-			h2 {
-			font-size: 1.75rem;
+			h3 {
+				font-size: 0.875rem;
 			}
 		}
+	}
+	#not_found {
+		h2 {
+			font-size: 1.75rem;
+		}
+	}
 	#main_content {
 		display: block;
 		min-height: 100vh;
@@ -445,9 +449,62 @@ body {
 		pointer-events: none;
 		&.opened {
 			opacity: 1;
-		pointer-events: all;
+			pointer-events: all;
 		}
 	}
+}
+@include media-breakpoint-down(md) {
+	html {
+		font-size: 14px;
+	}
+	#item_list {
+		.item {
+			a {
+				display: block;
+				&:hover {
+					.img-ct {
+						img {
+							transform: none;
+						}
+					}
+				}
+				&:after {
+					content: '';
+					clear: both;
+					width: 100%;
+					display: block;
+				}
+			}
+			.img-ct {
+				width: 40%;
+				padding-bottom:  20%;
+				float: left;
+			}
+			.date, .category, h3 {
+				width: 60%;
+				float: right;
+				padding-right: 1rem;
+				display: block;
+				padding-left: 1rem;
+			}
+			.date {
+				padding-bottom: 0;
+			}
+			.category {
+				padding-top: 0.425rem;
+				padding-bottom: 0.425rem;
+				&:after {
+					left: 1rem;
+				}
+			}
+			h3 {
+				    max-height: 2.5em;
+				    height: 2.5em;
+				        -webkit-line-clamp: 2;
+			}
+		}
+	}
+
 }
 @include media-breakpoint-down(sm) {
 	html {
